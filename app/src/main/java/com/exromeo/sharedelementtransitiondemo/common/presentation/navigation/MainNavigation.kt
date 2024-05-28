@@ -19,17 +19,11 @@ fun MainNavigation(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
 
     SharedTransitionLayout {
-
         NavHost(
             modifier = modifier,
             navController = navController,
             startDestination = Destinations.List.route,
-            enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-            popEnterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-            exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) },
-            popExitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
         ) {
-
 
             composable(Destinations.List.route) {
                 ListScreen(
@@ -51,8 +45,6 @@ fun MainNavigation(modifier: Modifier = Modifier) {
                     imageId = imageId
                 )
             }
-
-
         }
     }
 }

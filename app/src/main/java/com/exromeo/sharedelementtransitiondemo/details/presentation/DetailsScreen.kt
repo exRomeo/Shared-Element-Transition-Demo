@@ -3,34 +3,18 @@ package com.exromeo.sharedelementtransitiondemo.details.presentation
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import coil.compose.SubcomposeAsyncImage
+import com.exromeo.sharedelementtransitiondemo.details.presentation.composables.DetailsScreenTopSection
 import com.exromeo.sharedelementtransitiondemo.list.presentation.models.Image
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -46,36 +30,20 @@ fun SharedTransitionScope.DetailsScreen(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .sharedElement(
-                    state = rememberSharedContentState(key = image?.imageId ?: 0),
-                    animatedVisibilityScope = animatedContentScope,
-                )
-        ) {
-            SubcomposeAsyncImage(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                model = image?.imageId,
-                contentDescription = image?.desc,
-            )
 
-            IconButton(
-                modifier = Modifier
-                    .padding(20.dp)
-                    .windowInsetsPadding(WindowInsets.statusBars)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.primaryContainer.copy(0.3f))
-                    .align(Alignment.TopStart),
-                onClick = { navController.popBackStack() }
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = null
-                )
-            }
-        }
+        // Shared Transition Element: used the image id as key to identify this element
+        // notice here i marked the container as a shared element and not the photo as it will be the
+        // same size as the photo and also can contain another UI element which in this case is the back button
+        DetailsScreenTopSection(
+            modifier = Modifier.sharedElement(
+                state = rememberSharedContentState(key = image?.imageId ?: 0),
+                animatedVisibilityScope = animatedContentScope,
+            ),
+            image = image,
+            onBackClicked = { navController.popBackStack() })
+
+
+        // Shared Transition Element: used the text as key to identify this element
         Text(
             modifier = Modifier
                 .sharedBounds(

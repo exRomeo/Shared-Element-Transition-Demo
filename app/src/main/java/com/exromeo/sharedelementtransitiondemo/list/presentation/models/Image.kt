@@ -7,51 +7,35 @@ import kotlin.random.Random
 data class Image(
     val id: Int,
     @DrawableRes val imageId: Int,
-    val desc: String = "$id image description" /*@StringRes val description: Int*/
+    val desc: String = "$id image description"
 ) {
 
     companion object {
         val list = listOf(
             Image(
                 id = 1,
-                imageId = R.drawable.img_skyscrapers,
+                imageId = R.drawable.img_stage,
             ),
             Image(
                 id = 2,
-                imageId = R.drawable.img_night_scenery
+                imageId = R.drawable.img_clouds
             ),
             Image(
                 id = 3,
-                imageId = R.drawable.img_shirt_hangers
+                imageId = R.drawable.img_glasses_on_desk
             ),
             Image(
                 id = 4,
-                imageId = R.drawable.img_sunset_scenery
+                imageId = R.drawable.img_doggy
             ),
             Image(
                 id = 5,
-                imageId = R.drawable.img_snowy_mountains
+                imageId = R.drawable.img_reeds_field
             ),
-/*            Image(
+            Image(
                 id = 6,
-                imageId = R.drawable.img_skyscrapers
+                imageId = R.drawable.img_plant_in_a_glass
             ),
-            Image(
-                id = 7,
-                imageId = R.drawable.img_night_scenery
-            ),
-            Image(
-                id = 8,
-                imageId = R.drawable.img_shirt_hangers
-            ),
-            Image(
-                id = 9,
-                imageId = R.drawable.img_sunset_scenery
-            ),
-            Image(
-                id = 10,
-                imageId = R.drawable.img_snowy_mountains
-            ),*/
         )
 
         fun getItem(id: Int?) = list.find { it.id == id }
