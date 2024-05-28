@@ -6,7 +6,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.exromeo.sharedelementtransitiondemo.common.presentation.navigation.models.Destinations
-import com.exromeo.sharedelementtransitiondemo.details.presentation.DetailsScreen
 import com.exromeo.sharedelementtransitiondemo.list.presentation.ListScreen
 
 @Composable
@@ -26,16 +25,5 @@ fun MainNavigation(modifier: Modifier = Modifier) {
             )
         }
 
-        composable(
-            Destinations.Detail.route + "/{imageId}",
-            arguments = Destinations.Detail.args
-        ) { backStackEntry ->
-            val imageId = backStackEntry.arguments?.getInt("imageId")
-
-            DetailsScreen(
-                navController = navController,
-                imageId = imageId
-            )
-        }
     }
 }
