@@ -2,6 +2,7 @@ package com.exromeo.sharedelementtransitiondemo.list.presentation
 
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,24 +23,24 @@ import com.exromeo.sharedelementtransitiondemo.list.presentation.models.Image
 @Composable
 fun ListScreen(
     modifier: Modifier = Modifier,
-    animatedContentScope: AnimatedContentScope,
-    transitionScope: SharedTransitionScope,
     navController: NavController
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         ImagesListScreenHeader()
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 16.dp)
-        ) {
-            items(Image.list) {
-                ListItem(
-                    item = it,
-                    animatedContentScope = animatedContentScope,
-                    transitionScope = transitionScope,
-                    onClick = { navController.navigate(Destinations.Detail.route + "/${it.id}") }
-                )
+        SharedTransitionLayout {
+
+
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 16.dp)
+            ) {
+                items(Image.list) {
+                    ListItem(
+                        item = it,
+                        onClick = { navController.navigate(Destinations.Detail.route + "/${it.id}") }
+                    )
+                }
             }
         }
     }

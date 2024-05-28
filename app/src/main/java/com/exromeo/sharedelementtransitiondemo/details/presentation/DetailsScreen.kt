@@ -17,11 +17,9 @@ import androidx.navigation.NavController
 import com.exromeo.sharedelementtransitiondemo.details.presentation.composables.DetailsScreenTopSection
 import com.exromeo.sharedelementtransitiondemo.list.presentation.models.Image
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun SharedTransitionScope.DetailsScreen(
+fun DetailsScreen(
     modifier: Modifier = Modifier,
-    animatedContentScope: AnimatedContentScope,
     imageId: Int?,
     navController: NavController
 ) {
@@ -35,10 +33,7 @@ fun SharedTransitionScope.DetailsScreen(
         // notice here i marked the container as a shared element and not the photo as it will be the
         // same size as the photo and also can contain another UI element which in this case is the back button
         DetailsScreenTopSection(
-            modifier = Modifier.sharedElement(
-                state = rememberSharedContentState(key = image?.imageId ?: 0),
-                animatedVisibilityScope = animatedContentScope,
-            ),
+            modifier = Modifier,
             image = image,
             onBackClicked = { navController.popBackStack() })
 
@@ -46,10 +41,6 @@ fun SharedTransitionScope.DetailsScreen(
         // Shared Transition Element: used the text as key to identify this element
         Text(
             modifier = Modifier
-                .sharedBounds(
-                    sharedContentState = rememberSharedContentState(key = image?.desc ?: "0"),
-                    animatedVisibilityScope = animatedContentScope,
-                )
                 .padding(horizontal = 20.dp),
             text = image?.desc.orEmpty(),
             style = MaterialTheme.typography.titleLarge
