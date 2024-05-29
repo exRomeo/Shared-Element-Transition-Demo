@@ -9,6 +9,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        create("release") {
+            storeFile = file("../keystore.jks")
+            storePassword = "keystorepass"
+            keyAlias = "key0"
+            keyPassword = "keystorepass"
+        }
+    }
     namespace = "com.exromeo.sharedelementtransitiondemo"
     compileSdk = 34
 
@@ -32,6 +40,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {

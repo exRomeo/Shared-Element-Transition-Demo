@@ -1,5 +1,8 @@
 package com.exromeo.sharedelementtransitiondemo.products.data.models
 
+import androidx.annotation.Keep
+
+@Keep
 data class ProductDataModel (
     val id: Int? = null,
     val title: String? = null,
@@ -24,12 +27,14 @@ data class ProductDataModel (
     val thumbnail: String? = null
 )
 
+@Keep
 data class DimensionsDataModel (
     val width: Float? = null,
     val height: Float? = null,
     val depth: Float? = null
 )
 
+@Keep
 data class MetaDataModel (
     val createdAt: String? = null,
     val updatedAt: String? = null,
@@ -37,6 +42,7 @@ data class MetaDataModel (
     val qrCode: String? = null
 )
 
+@Keep
 data class ReviewDataModel (
     val rating: Int? = null,
     val comment: String? = null,
