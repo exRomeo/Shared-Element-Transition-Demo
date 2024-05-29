@@ -14,27 +14,27 @@ data class Image(
         val list = listOf(
             Image(
                 id = 1,
-                imageId = R.drawable.img_stage,
+                imageId = R.drawable.ic_launcher_background,
             ),
             Image(
                 id = 2,
-                imageId = R.drawable.img_clouds
+                imageId = R.drawable.ic_launcher_foreground
             ),
             Image(
                 id = 3,
-                imageId = R.drawable.img_glasses_on_desk
+                imageId = R.drawable.ic_launcher_background
             ),
             Image(
                 id = 4,
-                imageId = R.drawable.img_doggy
+                imageId = R.drawable.ic_launcher_foreground
             ),
             Image(
                 id = 5,
-                imageId = R.drawable.img_reeds_field
+                imageId = R.drawable.ic_launcher_background
             ),
             Image(
                 id = 6,
-                imageId = R.drawable.img_plant_in_a_glass
+                imageId = R.drawable.ic_launcher_background
             ),
         )
 
