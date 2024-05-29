@@ -11,6 +11,7 @@ composeBom = "2024.05.00"
 compose-animation = "1.7.0-beta01"
 navigation-compose = "2.7.7"
 coil = "2.6.0"
+shreyaspatil-compiler-reports = "1.3.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,4 +36,4 @@ coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+compose-compiler-html-report-generator = { id = "dev.shreyaspatil.compose-compiler-report-generator", version.ref = "shreyaspatil-compiler-reports" }
