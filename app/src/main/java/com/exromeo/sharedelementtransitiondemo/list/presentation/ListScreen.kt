@@ -71,9 +71,10 @@ fun ListScreen(
                 }
             }
 
-            FocusedImage(image = selected) {
+            FocusedImage(image = selected, onConfirmClick = {
                 selected.value = null
             }
+            )
         }
     }
 }

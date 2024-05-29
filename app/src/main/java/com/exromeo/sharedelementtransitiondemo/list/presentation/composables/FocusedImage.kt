@@ -11,9 +11,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.MaterialTheme
@@ -55,23 +55,16 @@ fun SharedTransitionScope.FocusedImage(
                         .clickable(onClick = onConfirmClick)
                         .background(MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f))
                 )
-
-                Column(
+                ImageContent(
                     modifier = Modifier
-                        .padding(horizontal = 16.dp)
+                        .padding(horizontal = 12.dp)
                         .sharedBounds(
                             sharedContentState = rememberSharedContentState(key = targetImage.desc),
                             animatedVisibilityScope = this@AnimatedContent,
-                            clipInOverlayDuringTransition = OverlayClip(MaterialTheme.shapes.medium)
-                        )
-                        .clip(MaterialTheme.shapes.medium)
-                        .background(MaterialTheme.colorScheme.primaryContainer)
-                ) {
-                    ImageContent(
-                        image = targetImage,
-                        onClick = onConfirmClick
-                    )
-                }
+                        ),
+                    image = targetImage,
+                    onClick = onConfirmClick
+                )
             }
         }
     }
@@ -85,6 +78,8 @@ private fun ImageContent(
 ) {
     Column(
         modifier = modifier
+            .clip(MaterialTheme.shapes.medium)
+            .background(MaterialTheme.colorScheme.primaryContainer)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null,
@@ -95,8 +90,8 @@ private fun ImageContent(
             model = image.imageId,
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(20f / 9f),
-            contentScale = ContentScale.Crop,
+                .height(180.dp),
+            contentScale = ContentScale.FillWidth,
             contentDescription = null
         )
         Text(
