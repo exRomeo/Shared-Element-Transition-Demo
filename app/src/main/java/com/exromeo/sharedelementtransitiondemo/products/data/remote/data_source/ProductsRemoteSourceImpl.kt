@@ -14,5 +14,11 @@ class ProductsRemoteSourceImpl @Inject constructor(
     ): ProductsListResponse =
         service.getProducts(skip, limit)
 
+    override suspend fun searchProducts(
+        skip: Int,
+        limit: Int,
+        query: String
+    ): ProductsListResponse =
+        service.searchProducts(skip, limit, query)
 
 }

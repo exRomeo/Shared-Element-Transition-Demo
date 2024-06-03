@@ -3,22 +3,23 @@ package com.exromeo.sharedelementtransitiondemo.list.presentation.composables
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -28,7 +29,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,21 +36,19 @@ import coil.compose.SubcomposeAsyncImage
 import com.exromeo.sharedelementtransitiondemo.list.presentation.models.ProductUIModel
 import com.exromeo.sharedelementtransitiondemo.list.presentation.models.ReviewUIModel
 
-@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun FocusedItem(
+fun SharedTransitionScope.FocusedItem(
     modifier: Modifier = Modifier,
     animatedVisibilityScope: AnimatedVisibilityScope,
-    transitionScope: SharedTransitionScope,
     item: ProductUIModel,
-) = with(transitionScope) {
+) {
     Column(
         modifier = modifier
             .sharedElement(
                 state = rememberSharedContentState(key = item.id.toString() + "-container"),
                 animatedVisibilityScope = animatedVisibilityScope
             )
-            .shadow(4.dp, shape = MaterialTheme.shapes.medium)
             .clip(MaterialTheme.shapes.medium)
             .background(MaterialTheme.colorScheme.secondaryContainer)
             .verticalScroll(rememberScrollState())
@@ -61,18 +59,13 @@ fun FocusedItem(
         }
         HorizontalPager(
             modifier = Modifier
-                .sharedBounds(
-                    sharedContentState = rememberSharedContentState(key = item.id.toString() + "-img"),
+                .aspectRatio(1.5f)
+                .windowInsetsPadding(WindowInsets.statusBars)
+                .sharedElement(
+                    state = rememberSharedContentState(key = item.id.toString() + "-img"),
                     animatedVisibilityScope = animatedVisibilityScope,
-                    clipInOverlayDuringTransition = OverlayClip(
-                        MaterialTheme.shapes.medium.copy(
-                            bottomStart = CornerSize(0.dp),
-                            bottomEnd = CornerSize(0.dp)
-                        )
-                    )
                 )
                 .fillMaxWidth()
-                .aspectRatio(2f)
                 .background(MaterialTheme.colorScheme.surfaceBright),
             state = pagerState
         ) {
@@ -94,7 +87,6 @@ fun FocusedItem(
 
         Text(
             modifier = Modifier
-                .fillMaxWidth()
                 .padding(horizontal = 20.dp, vertical = 16.dp)
                 .sharedBounds(
                     sharedContentState = rememberSharedContentState(key = item.id.toString() + "-title"),

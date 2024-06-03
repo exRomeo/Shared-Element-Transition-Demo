@@ -1,10 +1,9 @@
 package com.exromeo.sharedelementtransitiondemo.list.presentation.mappers
 
 import com.exromeo.sharedelementtransitiondemo.list.presentation.models.ProductUIModel
-import com.exromeo.sharedelementtransitiondemo.list.presentation.mappers.toUI
 import com.exromeo.sharedelementtransitiondemo.products.domain.models.ProductDomainModel
 
-fun ProductDomainModel.toUI(onClick: () -> Unit): ProductUIModel =
+fun ProductDomainModel.toUI(): ProductUIModel =
     ProductUIModel(
         id = uniqueID,
         title = title,
@@ -27,5 +26,4 @@ fun ProductDomainModel.toUI(onClick: () -> Unit): ProductUIModel =
         meta = meta?.toUI(),
         images = images,
         thumbnail = thumbnail,
-        onClick = onClick
     )

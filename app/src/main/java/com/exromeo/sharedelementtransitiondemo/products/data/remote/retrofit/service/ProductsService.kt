@@ -15,5 +15,13 @@ interface ProductsService {
         @Query("skip") skip: Int,
         @Query("limit") limit: Int
     ): ProductsListResponse
+
+    @GET("/products/search")
+    suspend fun searchProducts(
+        @Query("skip") skip: Int,
+        @Query("limit") limit: Int,
+        @Query("q") query: String
+    ): ProductsListResponse
+
 }
 

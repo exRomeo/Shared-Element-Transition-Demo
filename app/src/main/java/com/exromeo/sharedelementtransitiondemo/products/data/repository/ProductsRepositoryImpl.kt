@@ -21,4 +21,14 @@ class ProductsRepositoryImpl @Inject constructor(
             .products
             .map { it.toDomain() }
 
+    override suspend fun searchProducts(
+        skip: Int,
+        limit: Int,
+        query: String
+    ): List<ProductDomainModel> = remoteSource.searchProducts(
+        skip = skip,
+        limit = limit,
+        query = query
+    ).products.map { it.toDomain() }
+
 }

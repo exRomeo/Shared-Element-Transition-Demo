@@ -33,13 +33,12 @@ import com.exromeo.sharedelementtransitiondemo.list.presentation.models.ProductU
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun GridItem(
+fun SharedTransitionScope.GridItem(
     modifier: Modifier = Modifier,
     animatedVisibilityScope: AnimatedVisibilityScope,
-    transitionScope: SharedTransitionScope,
     item: ProductUIModel,
     onClick: () -> Unit
-) = with(transitionScope) {
+) {
     Column(
         modifier = modifier
             .aspectRatio(0.75f)
@@ -60,8 +59,9 @@ fun GridItem(
             SubcomposeAsyncImage(
                 modifier = Modifier
                     .align(Alignment.TopCenter)
-                    .sharedBounds(
-                        sharedContentState = rememberSharedContentState(key = item.id.toString() + "-img"),
+                    .aspectRatio(1f)
+                    .sharedElement(
+                        state = rememberSharedContentState(key = item.id.toString() + "-img"),
                         animatedVisibilityScope = animatedVisibilityScope,
                         clipInOverlayDuringTransition = OverlayClip(
                             MaterialTheme.shapes.medium.copy(
@@ -71,7 +71,6 @@ fun GridItem(
                         )
                     )
                     .fillMaxWidth()
-                    .aspectRatio(1f)
                     .background(MaterialTheme.colorScheme.surfaceBright),
                 model = item.thumbnail.orEmpty(),
                 loading = {

@@ -1,5 +1,13 @@
 package com.exromeo.sharedelementtransitiondemo.list.presentation.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+
+
+@Serializable
 data class ProductUIModel(
     val id: Int,
     val title: String?,
@@ -22,18 +30,28 @@ data class ProductUIModel(
     val meta: MetaUIModel?,
     val images: List<String>?,
     val thumbnail: String?,
-    val onClick: () -> Unit
-){
+) {
     val isAvailable
-        get() =  availabilityStatus == "In Stock"
+        get() = availabilityStatus == "In Stock"
+
+    fun toJson(): String = Json.encodeToString<ProductUIModel>(this)
+
+    companion object {
+        fun fromJson(json: String): ProductUIModel? =
+            kotlin.runCatching { Json.decodeFromString<ProductUIModel>(json) }.getOrNull()
+    }
 }
 
+
+@Serializable
 data class DimensionsUIModel(
     val width: Float?,
     val height: Float?,
     val depth: Float?
 )
 
+
+@Serializable
 data class MetaUIModel(
     val createdAt: String?,
     val updatedAt: String?,
@@ -41,6 +59,8 @@ data class MetaUIModel(
     val qrCode: String?
 )
 
+
+@Serializable
 data class ReviewUIModel(
     val rating: Int?,
     val comment: String?,
