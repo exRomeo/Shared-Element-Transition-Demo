@@ -74,7 +74,6 @@ dependencies {
 
     implementation(libs.kotlinx.serialization)
 
-
     implementation(libs.androidx.compose.animation)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.coil.kt.compose)
